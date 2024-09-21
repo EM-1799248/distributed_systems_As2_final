@@ -1,19 +1,25 @@
 # List of all Java files required for the application
 SOURCES = src/AggregationServer.java src/GETClient.java src/ContentServer.java src/LamportClock.java
 
+# Default port number
+PORT ?= 4567
+
 # Default target: compile everything automatically
-all: compile
+all: bin compile
+
+# Ensure bin directory is created before compiling
+bin:
+	mkdir -p bin
 
 # Compile the Java files required for the application, as defined in the SOURCES variable
 compile:
-	#javac -d bin $(SOURCES)
 	javac -cp .idea/libraries/gson-2.11.0.jar -d bin $(SOURCES)
 
 # Make command to run the Aggregation Server
 run-server:
 	@echo "Running the Aggregation Server..."
-	cd bin && java -verbose AggregationServer $(PORT)
 	#cd bin && java AggregationServer $(PORT)
+	 cd bin && java -verbose AggregationServer $(PORT)
 
 # Make command to run the GET Client
 run-client:
@@ -29,10 +35,3 @@ run-content:
 clean:
 	rm -rf bin/*.class
 	rm -rf bin
-
-# Ensure bin directory is created before compiling
-bin:
-	mkdir -p bin
-
-# Set a default port number if not specified
-PORT = 4567
