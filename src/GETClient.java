@@ -57,11 +57,26 @@ public class GETClient {
             }
 
             // Process and display JSON response
-            if (jsonResponse.length() > 0) {
+            if (!jsonResponse.isEmpty()) {
                 DataEntry entry = gson.fromJson(jsonResponse.toString(), DataEntry.class);
-                System.out.println("Source: " + entry.source);
-                System.out.println("Content: " + entry.content);
-                System.out.println("Timestamp: " + entry.timestamp);
+                // Print all fields of the DataEntry based on new structure
+                System.out.println("ID: " + entry.id);
+                System.out.println("Name: " + entry.name);
+                System.out.println("State: " + entry.state);
+                System.out.println("Time Zone: " + entry.time_zone);
+                System.out.println("Latitude: " + entry.lat);
+                System.out.println("Longitude: " + entry.lon);
+                System.out.println("Local Date Time: " + entry.local_date_time);
+                System.out.println("Local Date Time Full: " + entry.local_date_time_full);
+                System.out.println("Air Temperature: " + entry.air_temp);
+                System.out.println("Apparent Temperature: " + entry.apparent_t);
+                System.out.println("Cloud: " + entry.cloud);
+                System.out.println("Dew Point: " + entry.dewpt);
+                System.out.println("Pressure: " + entry.press);
+                System.out.println("Relative Humidity: " + entry.rel_hum);
+                System.out.println("Wind Direction: " + entry.wind_dir);
+                System.out.println("Wind Speed (km/h): " + entry.wind_spd_kmh);
+                System.out.println("Wind Speed (knots): " + entry.wind_spd_kt);
             }
 
         } catch (IOException e) {
@@ -71,14 +86,25 @@ public class GETClient {
 
     // Data structure to hold entries
     static class DataEntry {
-        String source;     // source of data (Content Server)
-        String content;
-        long timestamp;
+        String id; // Added fields to match your data structure
+        String name;
+        String state;
+        String time_zone;
+        double lat;
+        double lon;
+        String local_date_time;
+        String local_date_time_full;
+        double air_temp;
+        double apparent_t;
+        String cloud;
+        double dewpt;
+        double press;
+        double rel_hum;
+        String wind_dir;
+        double wind_spd_kmh;
+        double wind_spd_kt;
 
-        public DataEntry(String source, String content, long timestamp) {
-            this.source = source;
-            this.content = content;
-            this.timestamp = timestamp;
-        }
+        // Default constructor for Gson
+        public DataEntry() {}
     }
 }

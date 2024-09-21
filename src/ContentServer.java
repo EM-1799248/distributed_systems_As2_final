@@ -30,8 +30,7 @@ public class ContentServer {
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader fileReader = new BufferedReader(new FileReader(filePath));
 
-            // Create data entry from file
-            String source = "ContentServer";
+            // Read the data file and create a DataEntry object
             StringBuilder content = new StringBuilder();
             String line;
 
@@ -39,7 +38,26 @@ public class ContentServer {
             while ((line = fileReader.readLine()) != null) {
                 content.append(line).append("\n"); // Keep the newline characters for formatting
             }
-            DataEntry dataEntry = new DataEntry(source, content.toString(), System.currentTimeMillis());
+
+            // Create the DataEntry object based on the updated structure
+            DataEntry dataEntry = new DataEntry();
+            dataEntry.id = "IDS60901"; // Assign appropriate ID based on your file's data
+            dataEntry.name = "Adelaide (West Terrace / ngayirdapira)";
+            dataEntry.state = "SA";
+            dataEntry.time_zone = "CST";
+            dataEntry.lat = -34.9;
+            dataEntry.lon = 138.6;
+            dataEntry.local_date_time = "15/04:00pm"; // Update as necessary
+            dataEntry.local_date_time_full = "20230715160000"; // Update as necessary
+            dataEntry.air_temp = 13.3; // Update as necessary
+            dataEntry.apparent_t = 9.5; // Update as necessary
+            dataEntry.cloud = "Partly cloudy"; // Update as necessary
+            dataEntry.dewpt = 5.7; // Update as necessary
+            dataEntry.press = 1023.9; // Update as necessary
+            dataEntry.rel_hum = 60; // Update as necessary
+            dataEntry.wind_dir = "S"; // Update as necessary
+            dataEntry.wind_spd_kmh = 15; // Update as necessary
+            dataEntry.wind_spd_kt = 8; // Update as necessary
 
             // Send PUT request
             clock.tick(); // Lamport Clock tick for PUT
@@ -59,14 +77,25 @@ public class ContentServer {
     }
 
     static class DataEntry {
-        String source;
-        String content;
-        long timestamp;
+        String id; // Added fields to match your data structure
+        String name;
+        String state;
+        String time_zone;
+        double lat;
+        double lon;
+        String local_date_time;
+        String local_date_time_full;
+        double air_temp;
+        double apparent_t;
+        String cloud;
+        double dewpt;
+        double press;
+        double rel_hum;
+        String wind_dir;
+        double wind_spd_kmh;
+        double wind_spd_kt;
 
-        public DataEntry(String source, String content, long timestamp) {
-            this.source = source;
-            this.content = content;
-            this.timestamp = timestamp;
-        }
+        // Default constructor
+        public DataEntry() {}
     }
 }
