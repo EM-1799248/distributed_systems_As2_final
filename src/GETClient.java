@@ -59,7 +59,7 @@ public class GETClient {
             // Process and display JSON response
             if (!jsonResponse.isEmpty()) {
                 DataEntry entry = gson.fromJson(jsonResponse.toString(), DataEntry.class);
-                // Print all fields of the DataEntry based on new structure
+                // Print all fields of the DataEntry based on data file structure
                 System.out.println("ID: " + entry.id);
                 System.out.println("Name: " + entry.name);
                 System.out.println("State: " + entry.state);

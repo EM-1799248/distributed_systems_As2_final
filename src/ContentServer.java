@@ -39,7 +39,7 @@ public class ContentServer {
                 content.append(line).append("\n"); // Keep the newline characters for formatting
             }
 
-            // Create the DataEntry object based on the updated structure
+            // Create the DataEntry object based on the data file structure
             DataEntry dataEntry = new DataEntry();
             dataEntry.id = "IDS60901"; // Assign appropriate ID based on your file's data
             dataEntry.name = "Adelaide (West Terrace / ngayirdapira)";
